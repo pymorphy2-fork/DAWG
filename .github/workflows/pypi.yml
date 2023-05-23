@@ -1,10 +1,7 @@
-name: Tests
+name: Deploy to pypi.org
 
 on:
-  push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
+  workflow_dispatch:
 
 jobs:
   tests:
@@ -26,24 +23,23 @@ jobs:
       - uses: "actions/checkout@v3"
         with:
           submodules: true
+
       - uses: "actions/setup-python@v3"
         with:
           python-version: "${{ matrix.python-version }}"
+
       - name: "Install dependencies"
         run: |
-          python -VV
-          python -m site
-          python -m pip install --upgrade pip setuptools wheel virtualenv tox tox-gh-actions cython pytest
+          python -m pip install --upgrade pip setuptools wheel virtualenv cython twine
 
       - name: "Build CPP files using Cython"
         run: |
           sh -x update_cpp.sh
 
-      - name: "Install DAWG for ${{ matrix.python-version }}"
+      - name: Build and publish to Pypi
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
-          pip install .
-
-      - name: "Run tests for ${{ matrix.python-version }}"
-        run: |
-          python -m pytest
-
+          python setup.py sdist bdist_wheel
+          twine upload dist/*

@@ -3,13 +3,13 @@ import glob
 from setuptools import setup, Extension
 
 setup(
-    name="DAWG",
-    version="0.8.0",
+    name="DAWG2",
+    version="0.9.0rc1",
     description="Fast and memory efficient DAWG (DAFSA) for Python",
     long_description=open('README.rst').read() + '\n\n' + open('CHANGES.rst').read(),
     author='Mikhail Korobov',
     author_email='kmike84@gmail.com',
-    url='https://github.com/pytries/DAWG/',
+    url='https://github.com/pymorphy2-fork/DAWG/',
 
     ext_modules=[
         Extension(

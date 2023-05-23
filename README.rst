@@ -1,8 +1,8 @@
 DAWG
 ====
 
-.. image:: https://travis-ci.org/pytries/DAWG.png?branch=master
-    :target: https://travis-ci.org/pytries/DAWG
+.. image:: https://github.com/pymorphy2-fork/DAWG/actions/workflows/tox_tests.yml/badge.svg
+    :target: https://github.com/pymorphy2-fork/DAWG/actions/workflows/tox_tests.yml
 
 This package provides DAWG(DAFSA_)-based dictionary-like
 read-only objects for Python (2.x and 3.x).

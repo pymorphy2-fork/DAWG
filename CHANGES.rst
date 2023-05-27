@@ -5,7 +5,7 @@ Changes
 0.9.0 (2023-05-23)
 ------------------
 
-* Python 3.10 and 3.11 support is added
+* Python 3.9, 3.10 and 3.11 support is added
 
 0.8.0 (2020-02-19)
 ------------------

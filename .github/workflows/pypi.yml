@@ -4,29 +4,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
-    name: "Python ${{ matrix.python-version }} on ${{ matrix.os }}"
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        python-version: ["2.7", "3.6", "3.7", "3.8", "3.9", "3.10", "3.11"]
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        exclude:
-          - os: windows-latest
-            python-version: "2.7"
-          - os: ubuntu-latest
-            python-version: "3.6"
-      fail-fast: true
+  deploy:
+    name: "Deploy the package on pypi.org"
+    runs-on: ubuntu-latest
 
     steps:
       - uses: "actions/checkout@v3"
-        with:
-          submodules: true
-
-      - uses: "actions/setup-python@v3"
-        with:
-          python-version: "${{ matrix.python-version }}"
 
       - name: "Install dependencies"
         run: |
@@ -41,5 +24,5 @@ jobs:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
         run: |
-          python setup.py sdist bdist_wheel
+          python setup.py sdist
           twine upload dist/*

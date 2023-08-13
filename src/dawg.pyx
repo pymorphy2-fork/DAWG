@@ -225,7 +225,7 @@ cdef class DAWG:
 
         ``replaces`` is an object obtained from
         ``DAWG.compile_replaces(mapping)`` where mapping is a dict
-        that maps single-char unicode striings to (one or more) single-char
+        that maps single-char unicode strings to (one or more) single-char
         unicode strings.
 
         This may be useful e.g. for handling single-character umlauts.
@@ -282,7 +282,7 @@ cdef class DAWG:
         return dict(
             (
                 k.encode('utf8'),
-				[(v_entry.encode('utf8'), unicode(v_entry)) for v_entry in v]
+                [(v_entry.encode('utf8'), unicode(v_entry)) for v_entry in v]
             )
             for k, v in replaces.items()
         )
@@ -733,8 +733,8 @@ cdef class BytesDAWG(CompletionDAWG):
                     next_index = self.dct.Follow(b_replace_char, &next_index)
                     if next_index:
                         prefix = current_prefix + key[start_pos:word_pos] + u_replace_char
-						extra_items = self._similar_items(prefix, key, next_index, replace_chars)
-						res.extend(extra_items)
+                        extra_items = self._similar_items(prefix, key, next_index, replace_chars)
+                        res.extend(extra_items)
 
             if not self.dct.Follow(b_step, &index):
                 break
@@ -779,8 +779,8 @@ cdef class BytesDAWG(CompletionDAWG):
                     next_index = index
                     next_index = self.dct.Follow(b_replace_char, &next_index)
                     if next_index:
-						extra_items = self._similar_item_values(word_pos+1, key, next_index, replace_chars)
-						res.extend(extra_items)
+                        extra_items = self._similar_item_values(word_pos+1, key, next_index, replace_chars)
+                        res.extend(extra_items)
 
             if not self.dct.Follow(b_step, &index):
                 break

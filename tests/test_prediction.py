@@ -64,7 +64,7 @@ class TestPrediction(object):
         assert d.similar_item_values(word, self.REPLACES) == prediction
 
 class TestMultiValuedPrediction(object):
-    DATA = "хлѣб ёлка ель лѣс лѣсное всё всѣ бѣлёная изобрѣтён".split(" ")
+    DATA = "хлѣб ёлка ель лѣс лѣсное всё всѣ бѣлёная изобрѣтён лев лёв лѣв вѣнскій".split(" ")
     LENGTH_DATA = list(zip(DATA, ((len(w),) for w in DATA)))
 
     REPLACES = dawg.DAWG.compile_replaces({'е': ['ё', 'ѣ'], 'и': 'і'})
@@ -86,6 +86,8 @@ class TestMultiValuedPrediction(object):
         ('белѣная', []),
         ('бѣлѣная', []),
         ('все', ['всё', 'всѣ']),
+        ('лев', ['лев', 'лёв', 'лѣв']),
+        ('венский', ['вѣнскій']),
     ]
 
     SUITE_ITEMS = [

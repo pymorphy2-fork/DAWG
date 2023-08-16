@@ -201,8 +201,8 @@ cdef class DAWG:
             if b_step in replace_chars:
                 for (b_replace_char, u_replace_char) in replace_chars[b_step]:
                     next_index = index
-                    next_index = self.dct.Follow(b_replace_char, &next_index)
-                    if next_index:
+                    is_followed = self.dct.Follow(b_replace_char, &next_index)
+                    if is_followed:
                         prefix = current_prefix + key[start_pos:word_pos] + u_replace_char
                         extra_keys = self._similar_keys(prefix, key, next_index, replace_chars)
                         res.extend(extra_keys)
@@ -233,9 +233,9 @@ cdef class DAWG:
         return self._similar_keys("", key, self.dct.root(), replaces)
 
     cpdef list prefixes(self, unicode key):
-        '''
+        """
         Return a list with keys of this DAWG that are prefixes of the ``key``.
-        '''
+        """
         return [p.decode('utf8') for p in self.b_prefixes(<bytes>key.encode('utf8'))]
 
     cpdef list b_prefixes(self, bytes b_key):
@@ -254,9 +254,9 @@ cdef class DAWG:
         return res
 
     def iterprefixes(self, unicode key):
-        '''
+        """
         Return a generator with keys of this DAWG that are prefixes of the ``key``.
-        '''
+        """
         cdef BaseType index = self.dct.root()
         cdef bytes b_key = <bytes>key.encode('utf8')
         cdef int pos = 1
@@ -730,8 +730,8 @@ cdef class BytesDAWG(CompletionDAWG):
             if b_step in replace_chars:
                 for (b_replace_char, u_replace_char) in replace_chars[b_step]:
                     next_index = index
-                    next_index = self.dct.Follow(b_replace_char, &next_index)
-                    if next_index:
+                    is_followed = self.dct.Follow(b_replace_char, &next_index)
+                    if is_followed:
                         prefix = current_prefix + key[start_pos:word_pos] + u_replace_char
                         extra_items = self._similar_items(prefix, key, next_index, replace_chars)
                         res.extend(extra_items)
@@ -777,8 +777,8 @@ cdef class BytesDAWG(CompletionDAWG):
             if b_step in replace_chars:
                 for (b_replace_char, u_replace_char) in replace_chars[b_step]:
                     next_index = index
-                    next_index = self.dct.Follow(b_replace_char, &next_index)
-                    if next_index:
+                    is_followed = self.dct.Follow(b_replace_char, &next_index)
+                    if is_followed:
                         extra_items = self._similar_item_values(word_pos+1, key, next_index, replace_chars)
                         res.extend(extra_items)
 

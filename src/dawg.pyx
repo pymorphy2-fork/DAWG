@@ -199,13 +199,13 @@ cdef class DAWG:
             b_step = <bytes>(key[word_pos].encode('utf8'))
 
             if b_step in replace_chars:
-                next_index = index
-                b_replace_char, u_replace_char = <tuple>replace_chars[b_step]
-
-                if self.dct.Follow(b_replace_char, &next_index):
-                    prefix = current_prefix + key[start_pos:word_pos] + u_replace_char
-                    extra_keys = self._similar_keys(prefix, key, next_index, replace_chars)
-                    res.extend(extra_keys)
+                for (b_replace_char, u_replace_char) in replace_chars[b_step]:
+                    next_index = index
+                    is_followed = self.dct.Follow(b_replace_char, &next_index)
+                    if is_followed:
+                        prefix = current_prefix + key[start_pos:word_pos] + u_replace_char
+                        extra_keys = self._similar_keys(prefix, key, next_index, replace_chars)
+                        res.extend(extra_keys)
 
             if not self.dct.Follow(b_step, &index):
                 break
@@ -225,7 +225,7 @@ cdef class DAWG:
 
         ``replaces`` is an object obtained from
         ``DAWG.compile_replaces(mapping)`` where mapping is a dict
-        that maps single-char unicode sitrings to another single-char
+        that maps single-char unicode strings to (one or more) single-char
         unicode strings.
 
         This may be useful e.g. for handling single-character umlauts.
@@ -233,9 +233,9 @@ cdef class DAWG:
         return self._similar_keys("", key, self.dct.root(), replaces)
 
     cpdef list prefixes(self, unicode key):
-        '''
+        """
         Return a list with keys of this DAWG that are prefixes of the ``key``.
-        '''
+        """
         return [p.decode('utf8') for p in self.b_prefixes(<bytes>key.encode('utf8'))]
 
     cpdef list b_prefixes(self, bytes b_key):
@@ -254,9 +254,9 @@ cdef class DAWG:
         return res
 
     def iterprefixes(self, unicode key):
-        '''
+        """
         Return a generator with keys of this DAWG that are prefixes of the ``key``.
-        '''
+        """
         cdef BaseType index = self.dct.root()
         cdef bytes b_key = <bytes>key.encode('utf8')
         cdef int pos = 1
@@ -273,13 +273,16 @@ cdef class DAWG:
     def compile_replaces(cls, replaces):
 
         for k,v in replaces.items():
-            if len(k) != 1 or len(v) != 1:
-                raise ValueError("Keys and values must be single-char unicode strings.")
-
+            if len(k) != 1:
+                raise ValueError("Keys must be single-char unicode strings.")
+            if (isinstance(v, str) and len(v) != 1):
+                raise ValueError("Values must be single-char unicode strings or non-empty lists of such.")
+            if isinstance(v, list) and (any(len(v_entry) != 1 for v_entry in v) or len(v) < 1):
+                raise ValueError("Values must be single-char unicode strings or non-empty lists of such.")
         return dict(
             (
                 k.encode('utf8'),
-                (v.encode('utf8'), unicode(v))
+                [(v_entry.encode('utf8'), unicode(v_entry)) for v_entry in v]
             )
             for k, v in replaces.items()
         )
@@ -725,13 +728,13 @@ cdef class BytesDAWG(CompletionDAWG):
             b_step = <bytes>(key[word_pos].encode('utf8'))
 
             if b_step in replace_chars:
-                next_index = index
-                b_replace_char, u_replace_char = <tuple>replace_chars[b_step]
-
-                if self.dct.Follow(b_replace_char, &next_index):
-                    prefix = current_prefix + key[start_pos:word_pos] + u_replace_char
-                    extra_items = self._similar_items(prefix, key, next_index, replace_chars)
-                    res.extend(extra_items)
+                for (b_replace_char, u_replace_char) in replace_chars[b_step]:
+                    next_index = index
+                    is_followed = self.dct.Follow(b_replace_char, &next_index)
+                    if is_followed:
+                        prefix = current_prefix + key[start_pos:word_pos] + u_replace_char
+                        extra_items = self._similar_items(prefix, key, next_index, replace_chars)
+                        res.extend(extra_items)
 
             if not self.dct.Follow(b_step, &index):
                 break
@@ -752,7 +755,7 @@ cdef class BytesDAWG(CompletionDAWG):
 
         ``replaces`` is an object obtained from
         ``DAWG.compile_replaces(mapping)`` where mapping is a dict
-        that maps single-char unicode sitrings to another single-char
+        that maps single-char unicode strings to (one or more) single-char
         unicode strings.
         """
         return self._similar_items("", key, self.dct.root(), replaces)
@@ -772,12 +775,12 @@ cdef class BytesDAWG(CompletionDAWG):
             b_step = <bytes>(key[word_pos].encode('utf8'))
 
             if b_step in replace_chars:
-                next_index = index
-                b_replace_char, u_replace_char = <tuple>replace_chars[b_step]
-
-                if self.dct.Follow(b_replace_char, &next_index):
-                    extra_items = self._similar_item_values(word_pos+1, key, next_index, replace_chars)
-                    res.extend(extra_items)
+                for (b_replace_char, u_replace_char) in replace_chars[b_step]:
+                    next_index = index
+                    is_followed = self.dct.Follow(b_replace_char, &next_index)
+                    if is_followed:
+                        extra_items = self._similar_item_values(word_pos+1, key, next_index, replace_chars)
+                        res.extend(extra_items)
 
             if not self.dct.Follow(b_step, &index):
                 break
@@ -797,7 +800,7 @@ cdef class BytesDAWG(CompletionDAWG):
 
         ``replaces`` is an object obtained from
         ``DAWG.compile_replaces(mapping)`` where mapping is a dict
-        that maps single-char unicode sitrings to another single-char
+        that maps single-char unicode strings to (one or more) single-char
         unicode strings.
         """
         return self._similar_item_values(0, key, self.dct.root(), replaces)

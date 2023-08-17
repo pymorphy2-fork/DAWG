@@ -28,7 +28,7 @@ jobs:
         run: |
           python -VV
           python -m site
-          python -m pip install --upgrade pip setuptools wheel virtualenv tox tox-gh-actions cython pytest
+          python -m pip install --upgrade pip setuptools cython wheel pytest
 
       - name: "Build CPP files using Cython"
         run: |

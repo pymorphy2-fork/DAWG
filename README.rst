@@ -1,8 +1,8 @@
 DAWG2
 =====
 
-.. image:: https://github.com/pymorphy2-fork/DAWG/actions/workflows/tox_tests.yml/badge.svg
-    :target: https://github.com/pymorphy2-fork/DAWG/actions/workflows/tox_tests.yml
+.. image:: https://github.com/pymorphy2-fork/DAWG/actions/workflows/tests.yml/badge.svg
+    :target: https://github.com/pymorphy2-fork/DAWG/actions/workflows/tests.yml
 
 This is a fork of DAWG_ project rebuilt with Python 3.10+ support.
 

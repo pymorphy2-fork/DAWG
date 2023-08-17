@@ -9,7 +9,6 @@ extensions = [
         "dawg",
         sources=glob.glob('src/*.pyx'),# + glob.glob('lib/b64/*.c'),
         include_dirs=['lib'],
-        extra_compile_args=["-a", "--cplus", "-2"],
         language="c++",
     )
 ]
@@ -23,7 +22,7 @@ setup(
     author_email='kmike84@gmail.com',
     url='https://github.com/pymorphy2-fork/DAWG/',
 
-    ext_modules=cythonize(extensions),
+    ext_modules=cythonize(extensions, language="c++", annotate=False),
 
     classifiers=[
         'Development Status :: 4 - Beta',

@@ -7,13 +7,13 @@ from Cython.Build import cythonize
 extensions = [
     Extension(
         "dawg",
-        sources=glob.glob('src/*.pyx') + glob.glob('lib/b64/*.c'),
+        sources=glob.glob('src/*.pyx')# + glob.glob('lib/b64/*.c'),
         include_dirs=['lib'],
         extra_compile_args=["-a", "--cplus", "-2"],
         language="c++",
     )
 ]
-                                                            ]
+
 setup(
     name="DAWG2",
     version="0.9.1",

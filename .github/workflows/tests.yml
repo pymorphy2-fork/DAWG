@@ -38,9 +38,9 @@ jobs:
         run: |
           sh -x update_cpp.sh
 
-      - name: "Install DAWG for ${{ matrix.python-version }}"
+      - name: "Build DAWG for ${{ matrix.python-version }}"
         run: |
-          pip install .
+          python setup.py build_ext --inplace
 
       - name: "Run tests for ${{ matrix.python-version }}"
         run: |

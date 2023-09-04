@@ -1,8 +1,8 @@
 name: Build wheels
 
 on:
-  push:
-    branches: [master, cibw]
+  # push:
+  #   branches: [master, cibw]
   workflow_dispatch:
 
 jobs:

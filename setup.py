@@ -7,10 +7,8 @@ from Cython.Build import cythonize
 os.environ["TEST"] = "TRUE"
 TEST = bool(os.environ.get("TEST", False))
 
-compiler_directives: dict[str, int | bool] = {"language_level": 3}
-define_macros: list[tuple[str, str]] = [
-    # ("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")
-]
+compiler_directives = {"language_level": 3}
+define_macros = []
 
 if TEST:
     compiler_directives.update({"linetrace": True, "profile": True})

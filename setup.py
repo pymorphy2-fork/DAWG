@@ -1,8 +1,20 @@
 #! /usr/bin/env python
 import glob
+import os
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 
+os.environ["TEST"] = "TRUE"
+TEST = bool(os.environ.get("TEST", False))
+
+compiler_directives: dict[str, int | bool] = {"language_level": 3}
+define_macros: list[tuple[str, str]] = [
+    # ("NPY_NO_DEPRECATED_API", "NPY_1_7_API_VERSION")
+]
+
+if TEST:
+    compiler_directives.update({"linetrace": True, "profile": True})
+    define_macros.extend([("CYTHON_TRACE", "1"), ("CYTHON_TRACE_NOGIL", "1")])
 
 extensions = [
     Extension(
@@ -10,8 +22,16 @@ extensions = [
         sources=glob.glob('src/*.pyx') + glob.glob('lib/b64/*.c'),
         include_dirs=['lib'],
         language="c++",
+        define_macros=define_macros,
     )
 ]
+
+ext_modules = cythonize(
+    extensions,
+    language="c++",
+    annotate=False,
+    compiler_directives=compiler_directives,
+)
 
 setup(
     name="DAWG2",
@@ -22,7 +42,7 @@ setup(
     author_email='kmike84@gmail.com',
     url='https://github.com/pymorphy2-fork/DAWG/',
 
-    ext_modules=cythonize(extensions, language="c++", annotate=False),
+    ext_modules=ext_modules,
 
     classifiers=[
         'Development Status :: 4 - Beta',

@@ -34,10 +34,6 @@ jobs:
           python -m site
           python -m pip install --upgrade pip setuptools cython wheel pytest pytest-cov
 
-      - name: "Build CPP files using Cython"
-        run: |
-          sh -x update_cpp.sh
-
       - name: "Build DAWG for ${{ matrix.python-version }}"
         run: |
           python setup.py build_ext --inplace

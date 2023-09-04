@@ -44,5 +44,11 @@ jobs:
 
       - name: "Run tests for ${{ matrix.python-version }}"
         run: |
-          python -m pytest
-
+          python -m pytest --cov=./
+    
+      - name: Upload coverage data to coveralls.io
+        run: |
+          pip install coveralls
+          coveralls --service=github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

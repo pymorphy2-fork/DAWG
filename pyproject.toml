@@ -1,2 +1,22 @@
 [build-system]
 requires = ["setuptools", "wheel", "Cython"]
+
+[tool.coverage.run]
+plugins = [
+    "Cython.Coverage"
+]
+omit = [
+    "*/__init__.py",
+    "tests/*",
+]
+source = [
+    "src",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "@(abc\\.)?abstractmethod",
+]
+include = ["src/*"]

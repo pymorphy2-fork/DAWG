@@ -10,7 +10,7 @@ omit = [
     "tests/*",
 ]
 source = [
-    "app",
+    "src",
 ]
 
 [tool.coverage.report]

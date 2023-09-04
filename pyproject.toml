@@ -19,3 +19,4 @@ exclude_lines = [
     "def __repr__",
     "@(abc\\.)?abstractmethod",
 ]
+include = ["src/*"]

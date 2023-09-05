@@ -6,7 +6,8 @@ Authors & Contributors
 * Jakub Wilk;
 * Alex Moiseenko;
 * `Matt Hickford <https://github.com/matt-hickford>`_;
-* `Ikuya Yamada <https://github.com/ikuyamada>`_.
+* `Ikuya Yamada <https://github.com/ikuyamada>`_;
+* `bt2901 <https://github.com/bt2901>`_.
 
 This module uses `dawgdic`_ C++ library by
 Susumu Yata & contributors.

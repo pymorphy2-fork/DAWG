@@ -14,7 +14,7 @@ This is a fork of DAWG_ project rebuilt with Python 3.10+ support.
 .. _DAWG: https://pypi.org/project/DAWG/
 
 This package provides DAWG (DAFSA_)-based dictionary-like
-read-only objects for Python (2.x and 3.x).
+read-only objects for Python.
 
 String data in a DAWG may take 200x less memory than in
 a standard Python dict and the raw lookup speed is comparable;

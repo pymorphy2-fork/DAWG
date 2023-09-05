@@ -4,25 +4,79 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
-    name: "Deploy the package on pypi.org"
-    runs-on: ubuntu-latest
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-20.04
+          - windows-2019
+          - macos-12
 
     steps:
-      - uses: "actions/checkout@v3"
+      - uses: actions/checkout@v3
 
-      - name: "Install dependencies"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.*
+
+      - name: Install cibuildwheel
         run: |
-          python -m pip install --upgrade pip setuptools wheel virtualenv cython twine
+          python -m pip install cibuildwheel
 
-      - name: "Build CPP files using Cython"
+      - name: Build wheels
         run: |
-          sh -x update_cpp.sh
-
-      - name: Build and publish to Pypi
+          python -m cibuildwheel --output-dir wheelhouse
         env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          CIBW_ARCHS_LINUX: x86_64 i686
+          CIBW_ARCHS_MACOS: x86_64 universal2
+          CIBW_ARCHS_WINDOWS: AMD64 x86
+          CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-*"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: ./wheelhouse/*.whl
+
+  build_sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        name: Install Python
+        with:
+          python-version: 3.*
+
+      - name: Install dependencies
         run: |
-          python setup.py sdist
-          twine upload dist/*
+          python -m pip install --upgrade cython
+
+      - name: Build sdist
+        run: python setup.py sdist
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist/*.tar.gz
+
+  upload_all:
+    name: Upload if release
+    needs: [build_wheels, build_sdist]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+
+    steps:
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.x"
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: artifact
+        path: dist
+
+    - uses: pypa/gh-action-pypi-publish@v1.5.1
+      with:
+        user: ${{ secrets.PYPI_USERNAME }}
+        password: ${{ secrets.PYPI_PASSWORD }}

@@ -3,7 +3,7 @@ Changes
 =======
 
 0.10.0 (2023-09-05)
-------------------
+-------------------
 
 * More flexible char substitutes (by bt2901)
 * Support of Python versions older then 3.8 is dropped

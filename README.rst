@@ -5,9 +5,6 @@ DAWG2
     :target: https://github.com/pymorphy2-fork/DAWG/actions/workflows/tests.yml
 .. image:: https://coveralls.io/repos/github/pymorphy2-fork/DAWG/badge.svg?branch=master
     :target: https://coveralls.io/github/pymorphy2-fork/DAWG?branch=master
-.. image:: https://img.shields.io/pypi/v/dawg2
-    :target: https://pypi.org/project/dawg2/
-.. image:: https://img.shields.io/pypi/pyversions/dawg2
 
 This is a fork of DAWG_ project rebuilt with Python 3.10+ support.
 

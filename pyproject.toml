@@ -20,3 +20,6 @@ exclude_lines = [
     "@(abc\\.)?abstractmethod",
 ]
 include = ["src/*"]
+
+[tool.black]
+line-length = 120

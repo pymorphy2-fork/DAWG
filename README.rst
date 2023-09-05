@@ -5,14 +5,16 @@ DAWG2
     :target: https://github.com/pymorphy2-fork/DAWG/actions/workflows/tests.yml
 .. image:: https://coveralls.io/repos/github/pymorphy2-fork/DAWG/badge.svg?branch=master
     :target: https://coveralls.io/github/pymorphy2-fork/DAWG?branch=master
-
+.. image:: https://img.shields.io/pypi/v/dawg2
+    :target: https://pypi.org/project/dawg2/
+.. image:: https://img.shields.io/pypi/pyversions/dawg2
 
 This is a fork of DAWG_ project rebuilt with Python 3.10+ support.
 
 .. _DAWG: https://pypi.org/project/DAWG/
 
 This package provides DAWG (DAFSA_)-based dictionary-like
-read-only objects for Python (2.x and 3.x).
+read-only objects for Python.
 
 String data in a DAWG may take 200x less memory than in
 a standard Python dict and the raw lookup speed is comparable;

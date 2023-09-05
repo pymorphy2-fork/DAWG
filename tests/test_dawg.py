@@ -7,25 +7,25 @@ from io import BytesIO
 import pytest
 import dawg
 
+
 def test_contains():
-    d = dawg.IntDAWG({'foo': 1, 'bar': 2, 'foobar': 3})
+    d = dawg.IntDAWG({"foo": 1, "bar": 2, "foobar": 3})
 
-    assert 'foo' in d
-    assert 'bar' in d
-    assert 'foobar' in d
-    assert 'fo' not in d
-    assert 'x' not in d
+    assert "foo" in d
+    assert "bar" in d
+    assert "foobar" in d
+    assert "fo" not in d
+    assert "x" not in d
 
-    assert b'foo' in d
-    assert b'x' not in d
+    assert b"foo" in d
+    assert b"x" not in d
 
 
 class TestDAWG(object):
-
     def test_sorted_iterable(self):
 
-        sorted_data = ['bar', 'foo', 'foobar']
-        contents = "\n".join(sorted_data).encode('utf8')
+        sorted_data = ["bar", "foo", "foobar"]
+        contents = "\n".join(sorted_data).encode("utf8")
         with tempfile.NamedTemporaryFile() as f:
             f.write(contents)
             f.seek(0)
@@ -33,23 +33,23 @@ class TestDAWG(object):
             words = (line.strip() for line in f)
             d = dawg.DAWG(words, input_is_sorted=True)
 
-        assert 'bar' in d
-        assert 'foo' in d
+        assert "bar" in d
+        assert "foo" in d
 
     def test_no_segfaults_on_invalid_file(self):
         d = dawg.DAWG()
         fd, path = tempfile.mkstemp()
-        with open(path, 'w') as f:
-            f.write('foo')
+        with open(path, "w") as f:
+            f.write("foo")
 
         with pytest.raises(IOError) as e:
             d.load(path)
-            assert 'Invalid' in e.args[0]
+            assert "Invalid" in e.args[0]
 
-        with open(path, 'rb') as f:
+        with open(path, "rb") as f:
             with pytest.raises(IOError) as e:
                 d.read(f)
-                assert 'Invalid' in e.args[0]
+                assert "Invalid" in e.args[0]
 
     def test_no_segfaults_after_wrong_stream(self):
         d = dawg.DAWG()
@@ -58,21 +58,21 @@ class TestDAWG(object):
         with pytest.raises(IOError):
             d.load(wrong_path)
 
-        assert 'random-key' not in d # there is possible segfault
+        assert "random-key" not in d  # there is possible segfault
 
     def test_build_errors(self):
         with pytest.raises(dawg.Error):
-            data = [b'foo\x00bar', b'bar']
+            data = [b"foo\x00bar", b"bar"]
             dawg.DAWG(data)
 
     def test_contains_with_null_bytes(self):
-        d = dawg.DAWG(['foo'])
-        assert b'foo' in d
-        assert b'foo\x00bar' not in d
+        d = dawg.DAWG(["foo"])
+        assert b"foo" in d
+        assert b"foo\x00bar" not in d
 
     def test_unicode_sorting(self):
-        key1 = '\U00010345\U0001033f\U00010337\U00010330\U0001033d'
-        key2 = '\uff72\uff9c\uff90\uff7b\uff9e\uff9c'
+        key1 = "\U00010345\U0001033f\U00010337\U00010330\U0001033d"
+        key2 = "\uff72\uff9c\uff90\uff7b\uff9e\uff9c"
 
         # This apparently depends on Python version:
         # assert key1 < key2
@@ -84,13 +84,12 @@ class TestDAWG(object):
         dawg.DAWG([key1, key2])
 
 
-
 class TestIntDAWG(object):
 
     IntDAWG = dawg.IntDAWG
 
     def dawg(self):
-        payload = {'foo': 1, 'bar': 5, 'foobar': 3}
+        payload = {"foo": 1, "bar": 5, "foobar": 3}
         d = self.IntDAWG(payload)
         return payload, d
 
@@ -100,8 +99,7 @@ class TestIntDAWG(object):
             assert d[key] == payload[key]
 
         with pytest.raises(KeyError):
-            d['fo']
-
+            d["fo"]
 
     def test_dumps_loads(self):
         payload, d = self.dawg()
@@ -138,15 +136,15 @@ class TestIntDAWG(object):
             assert d[key] == value
 
     def test_int_value_ranges(self):
-        for val in [0, 5, 2**16-1, 2**31-1]:
-            d = self.IntDAWG({'f': val})
-            assert d['f'] == val
+        for val in [0, 5, 2**16 - 1, 2**31 - 1]:
+            d = self.IntDAWG({"f": val})
+            assert d["f"] == val
 
         with pytest.raises(ValueError):
-            self.IntDAWG({'f': -1})
+            self.IntDAWG({"f": -1})
 
         with pytest.raises(OverflowError):
-            self.IntDAWG({'f': 2**32-1})
+            self.IntDAWG({"f": 2**32 - 1})
 
 
 class TestIntCompletionDAWG(TestIntDAWG):
@@ -154,7 +152,7 @@ class TestIntCompletionDAWG(TestIntDAWG):
 
 
 class TestCompletionDAWG(object):
-    keys = ['f', 'bar', 'foo', 'foobar']
+    keys = ["f", "bar", "foo", "foobar"]
 
     def dawg(self):
         return dawg.CompletionDAWG(self.keys)
@@ -197,18 +195,18 @@ class TestCompletionDAWG(object):
     def test_completion(self):
         d = self.dawg()
 
-        assert d.keys('z') == []
-        assert d.keys('b') == ['bar']
-        assert d.keys('foo') == ['foo', 'foobar']
+        assert d.keys("z") == []
+        assert d.keys("b") == ["bar"]
+        assert d.keys("foo") == ["foo", "foobar"]
 
     def test_has_keys_with_prefix(self):
-        assert self.empty_dawg().has_keys_with_prefix('') == False
+        assert self.empty_dawg().has_keys_with_prefix("") == False
 
         d = self.dawg()
-        assert d.has_keys_with_prefix('') == True
-        assert d.has_keys_with_prefix('b') == True
-        assert d.has_keys_with_prefix('fo') == True
-        assert d.has_keys_with_prefix('bo') == False
+        assert d.has_keys_with_prefix("") == True
+        assert d.has_keys_with_prefix("b") == True
+        assert d.has_keys_with_prefix("fo") == True
+        assert d.has_keys_with_prefix("bo") == False
 
     def test_completion_dawg_saveload(self):
         buf = BytesIO()
@@ -221,15 +219,15 @@ class TestCompletionDAWG(object):
         for key in self.keys:
             assert key in d
 
-        assert d.keys('foo') == ['foo', 'foobar']
-        assert d.keys('b') == ['bar']
-        assert d.keys('z') == []
+        assert d.keys("foo") == ["foo", "foobar"]
+        assert d.keys("b") == ["bar"]
+        assert d.keys("z") == []
 
     def test_no_segfaults_on_invalid_file(self):
         d = self.dawg()
         fd, path = tempfile.mkstemp()
-        with open(path, 'w') as f:
-            f.write('foo')
+        with open(path, "w") as f:
+            f.write("foo")
 
         with pytest.raises(IOError) as e:
             d.load(path)
@@ -241,7 +239,7 @@ class TestCompletionDAWG(object):
 
 
 class TestIntCompletionDAWGComplete(TestCompletionDAWG):
-    keys = ['f', 'bar', 'foo', 'foobar']
+    keys = ["f", "bar", "foo", "foobar"]
 
     def dawg(self):
         return dawg.IntCompletionDAWG((k, len(k)) for k in self.keys)
@@ -267,4 +265,4 @@ class TestIntCompletionDAWGComplete(TestCompletionDAWG):
 
     def test_items_prefix(self):
         d = self.dawg()
-        assert d.items('fo') == [('foo', 3), ('foobar', 6)]
+        assert d.items("fo") == [("foo", 3), ("foobar", 6)]

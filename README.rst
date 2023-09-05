@@ -13,6 +13,13 @@ This is a fork of DAWG_ project rebuilt with Python 3.10+ support.
 
 .. _DAWG: https://pypi.org/project/DAWG/
 
+Installation::
+
+    pip install dawg2
+
+But imported name is still ``dawg``, not dawg2.
+
+
 This package provides DAWG (DAFSA_)-based dictionary-like
 read-only objects for Python.
 

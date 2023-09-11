@@ -1,4 +1,5 @@
-from _base_types cimport BaseType, SizeType, ValueType, UCharType, CharType
+from _base_types cimport BaseType, CharType, SizeType, UCharType, ValueType
+
 
 cdef extern from "../lib/dawgdic/guide-unit.h" namespace "dawgdic":
     cdef cppclass GuideUnit:

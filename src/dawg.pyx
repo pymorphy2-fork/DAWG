@@ -1,29 +1,24 @@
 # cython: profile=False
 # cython: embedsignature=True
-from __future__ import unicode_literals
-from libcpp.string cimport string
-from libcpp.vector cimport vector
-from iostream cimport stringstream, istream, ostream, ifstream
-cimport iostream
 
 cimport _dawg
+cimport _dictionary_builder
+cimport _guide_builder
+cimport b64_decode
+cimport iostream
+from _base_types cimport BaseType, CharType, SizeType
+from _completer cimport Completer
 from _dawg_builder cimport DawgBuilder
 from _dictionary cimport Dictionary
 from _guide cimport Guide
-from _completer cimport Completer
-from _base_types cimport BaseType, SizeType, CharType
-cimport _guide_builder
-cimport _dictionary_builder
-cimport b64_decode
+from iostream cimport ifstream, istream, ostream, stringstream
+from libcpp.string cimport string
+from libcpp.vector cimport vector
 
-try:
-    from collections.abc import Mapping
-except ImportError:
-    # Python 2.7
-    from collections import Mapping
 import struct
 import sys
 from binascii import b2a_base64
+from collections.abc import Mapping
 
 
 class Error(Exception):

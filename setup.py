@@ -1,8 +1,9 @@
 #! /usr/bin/env python
 import glob
 import os
-from setuptools import setup, Extension
+
 from Cython.Build import cythonize
+from setuptools import Extension, setup
 
 os.environ["TEST"] = "TRUE"
 TEST = bool(os.environ.get("TEST", False))

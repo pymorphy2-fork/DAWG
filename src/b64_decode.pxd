@@ -1,5 +1,6 @@
 from iostream cimport istream, ostream
 
+
 cdef extern from "../lib/b64/decode.h" namespace "base64":
 
     cdef cppclass decoder:

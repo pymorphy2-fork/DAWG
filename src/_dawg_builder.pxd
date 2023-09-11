@@ -1,5 +1,6 @@
-from _base_types cimport BaseType, SizeType, ValueType, UCharType, CharType
+from _base_types cimport BaseType, CharType, SizeType, UCharType, ValueType
 from _dawg cimport Dawg
+
 
 cdef extern from "../lib/dawgdic/dawg-builder.h" namespace "dawgdic":
     cdef cppclass DawgBuilder:

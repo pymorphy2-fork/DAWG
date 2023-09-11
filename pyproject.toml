@@ -23,3 +23,15 @@ include = ["src/*"]
 
 [tool.black]
 line-length = 120
+extend-exclude = "docs"
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 120
+select = ["E", "F", "UP"]
+ignore = ["UP015"]
+unfixable = ["F401"]
+target-version = "py38"
+exclude = ["docs"]

@@ -1,6 +1,7 @@
-from _base_types cimport BaseType, SizeType, ValueType, UCharType, CharType
+from _base_types cimport BaseType, CharType, SizeType, UCharType, ValueType
 from _guide_unit cimport GuideUnit
 from iostream cimport istream, ostream
+
 
 cdef extern from "../lib/dawgdic/guide.h" namespace "dawgdic":
     cdef cppclass Guide:

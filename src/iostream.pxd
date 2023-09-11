@@ -1,5 +1,6 @@
-from libcpp.string cimport string
 from libcpp cimport bool
+from libcpp.string cimport string
+
 
 cdef extern from "<istream>" namespace "std" nogil:
     cdef cppclass istream:

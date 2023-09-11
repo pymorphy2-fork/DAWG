@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
 import pickle
 import tempfile
 from io import BytesIO
 
 import pytest
+
 import dawg
 
 
@@ -21,7 +20,7 @@ def test_contains():
     assert b"x" not in d
 
 
-class TestDAWG(object):
+class TestDAWG:
     def test_sorted_iterable(self):
 
         sorted_data = ["bar", "foo", "foobar"]
@@ -84,7 +83,7 @@ class TestDAWG(object):
         dawg.DAWG([key1, key2])
 
 
-class TestIntDAWG(object):
+class TestIntDAWG:
 
     IntDAWG = dawg.IntDAWG
 
@@ -151,7 +150,7 @@ class TestIntCompletionDAWG(TestIntDAWG):
     IntDAWG = dawg.IntCompletionDAWG  # checks that all tests for IntDAWG pass
 
 
-class TestCompletionDAWG(object):
+class TestCompletionDAWG:
     keys = ["f", "bar", "foo", "foobar"]
 
     def dawg(self):
@@ -200,13 +199,13 @@ class TestCompletionDAWG(object):
         assert d.keys("foo") == ["foo", "foobar"]
 
     def test_has_keys_with_prefix(self):
-        assert self.empty_dawg().has_keys_with_prefix("") == False
+        assert self.empty_dawg().has_keys_with_prefix("") is False
 
         d = self.dawg()
-        assert d.has_keys_with_prefix("") == True
-        assert d.has_keys_with_prefix("b") == True
-        assert d.has_keys_with_prefix("fo") == True
-        assert d.has_keys_with_prefix("bo") == False
+        assert d.has_keys_with_prefix("") is True
+        assert d.has_keys_with_prefix("b") is True
+        assert d.has_keys_with_prefix("fo") is True
+        assert d.has_keys_with_prefix("bo") is False
 
     def test_completion_dawg_saveload(self):
         buf = BytesIO()

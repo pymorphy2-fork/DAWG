@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
-
 import pytest
+
 import dawg
 
 
-class TestBytesDAWG(object):
+class TestBytesDAWG:
 
     DATA = (
         ("foo", b"data3"),
@@ -84,7 +82,7 @@ class TestBytesDAWG(object):
             self.dawg(payload_separator=b"f")
 
 
-class TestRecordDAWG(object):
+class TestRecordDAWG:
 
     STRUCTURED_DATA = (
         ("foo", (3, 2, 256)),

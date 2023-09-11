@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-from __future__ import absolute_import, unicode_literals
 import pytest
+
 import dawg
 
 
-class TestPrediction(object):
+class TestPrediction:
     DATA = [
         "ЁЖИК",
         "ЁЖИКЕ",
@@ -45,21 +44,21 @@ class TestPrediction(object):
 
     @pytest.mark.parametrize(("word", "prediction"), SUITE)
     def test_record_dawg_prediction(self, word, prediction):
-        d = dawg.RecordDAWG(str("=H"), self.LENGTH_DATA)
+        d = dawg.RecordDAWG("=H", self.LENGTH_DATA)
         assert d.similar_keys(word, self.REPLACES) == prediction
 
     @pytest.mark.parametrize(("word", "prediction"), SUITE_ITEMS)
     def test_record_dawg_items(self, word, prediction):
-        d = dawg.RecordDAWG(str("=H"), self.LENGTH_DATA)
+        d = dawg.RecordDAWG("=H", self.LENGTH_DATA)
         assert d.similar_items(word, self.REPLACES) == prediction
 
     @pytest.mark.parametrize(("word", "prediction"), SUITE_VALUES)
     def test_record_dawg_items_values(self, word, prediction):
-        d = dawg.RecordDAWG(str("=H"), self.LENGTH_DATA)
+        d = dawg.RecordDAWG("=H", self.LENGTH_DATA)
         assert d.similar_item_values(word, self.REPLACES) == prediction
 
 
-class TestMultiValuedPrediction(object):
+class TestMultiValuedPrediction:
     DATA = "хлѣб ёлка ель лѣс лѣсное всё всѣ бѣлёная изобрѣтён лев лёв лѣв вѣнскій".split(" ")
     LENGTH_DATA = list(zip(DATA, ((len(w),) for w in DATA)))
 
@@ -97,15 +96,15 @@ class TestMultiValuedPrediction(object):
 
     @pytest.mark.parametrize(("word", "prediction"), SUITE)
     def test_record_dawg_prediction(self, word, prediction):
-        d = dawg.RecordDAWG(str("=H"), self.LENGTH_DATA)
+        d = dawg.RecordDAWG("=H", self.LENGTH_DATA)
         assert d.similar_keys(word, self.REPLACES) == prediction
 
     @pytest.mark.parametrize(("word", "prediction"), SUITE_ITEMS)
     def test_record_dawg_items(self, word, prediction):
-        d = dawg.RecordDAWG(str("=H"), self.LENGTH_DATA)
+        d = dawg.RecordDAWG("=H", self.LENGTH_DATA)
         assert d.similar_items(word, self.REPLACES) == prediction
 
     @pytest.mark.parametrize(("word", "prediction"), SUITE_VALUES)
     def test_record_dawg_items_values(self, word, prediction):
-        d = dawg.RecordDAWG(str("=H"), self.LENGTH_DATA)
+        d = dawg.RecordDAWG("=H", self.LENGTH_DATA)
         assert d.similar_item_values(word, self.REPLACES) == prediction

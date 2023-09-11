@@ -1,6 +1,7 @@
-from _base_types cimport BaseType, SizeType, ValueType, UCharType, CharType
+from _base_types cimport BaseType, CharType, SizeType, UCharType, ValueType
 from _dictionary_unit cimport DictionaryUnit
 from iostream cimport istream, ostream
+
 
 cdef extern from "../lib/dawgdic/dictionary.h" namespace "dawgdic":
     cdef cppclass Dictionary:

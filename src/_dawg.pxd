@@ -1,4 +1,5 @@
-from _base_types cimport BaseType, SizeType, ValueType, UCharType
+from _base_types cimport BaseType, SizeType, UCharType, ValueType
+
 
 cdef extern from "../lib/dawgdic/dawg.h" namespace "dawgdic":
 

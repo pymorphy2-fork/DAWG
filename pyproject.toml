@@ -9,6 +9,9 @@ source = [
     "src",
     "tests"
 ]
+omit = [
+    "bench/*",
+]
 
 [tool.coverage.report]
 exclude_lines = [

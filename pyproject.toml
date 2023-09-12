@@ -5,12 +5,9 @@ requires = ["setuptools", "wheel", "Cython"]
 plugins = [
     "Cython.Coverage"
 ]
-omit = [
-    "*/__init__.py",
-    "tests/*",
-]
 source = [
     "src",
+    "tests"
 ]
 
 [tool.coverage.report]
@@ -19,7 +16,6 @@ exclude_lines = [
     "def __repr__",
     "@(abc\\.)?abstractmethod",
 ]
-include = ["src/*"]
 
 [tool.black]
 line-length = 120

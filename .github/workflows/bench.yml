@@ -1,0 +1,32 @@
+name: Benchmarks
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: "Python ${{ matrix.python-version }} on ${{ matrix.os }}"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: "actions/checkout@v3"
+      - uses: "actions/setup-python@v3"
+        with:
+          python-version: 3.*
+
+      - name: "Install dependencies"
+        run: |
+          python -VV
+          python -m pip install --upgrade pip setuptools cython
+
+      - name: "Run benchmark"
+        run: |
+          echo '### Results ' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          python -VV >> $GITHUB_STEP_SUMMARY
+          python -m bench.speed >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY

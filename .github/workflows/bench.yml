@@ -26,6 +26,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip setuptools cython
 
+      - name: "Build DAWG"
+        run: |
+          python setup.py build_ext --inplace
+
       - name: "Run benchmark"
         run: |
           echo '### Results ' >> $GITHUB_STEP_SUMMARY

@@ -8,8 +8,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  tests:
-    name: "Python ${{ matrix.python-version }} on ${{ matrix.os }}"
+  benchmark:
+    name: "Run benchmark"
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,6 @@ jobs:
 
       - name: "Install dependencies"
         run: |
-          python -VV
           python -m pip install --upgrade pip setuptools cython
 
       - name: "Run benchmark"

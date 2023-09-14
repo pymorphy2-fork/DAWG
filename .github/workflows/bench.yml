@@ -1,4 +1,4 @@
-name: Benchmarks
+name: Benchmark
 
 on:
   workflow_run:
@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   benchmark:
-    name: "Run benchmarks"
+    name: "Run benchmark"
     runs-on: ubuntu-latest
 
     steps:

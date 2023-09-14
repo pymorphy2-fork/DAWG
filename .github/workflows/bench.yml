@@ -1,10 +1,10 @@
 name: Benchmarks
 
 on:
-  push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
+  workflow_run:
+    workflows: [Tests]
+    types:
+      - completed
   workflow_dispatch:
 
 concurrency:
@@ -37,7 +37,7 @@ jobs:
 
       - name: "Run benchmark"
         run: |
-          echo '### Benchmark results :rocket:' >> $GITHUB_STEP_SUMMARY
+          echo '### Benchmark results' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           python -VV >> $GITHUB_STEP_SUMMARY
           python -m bench.speed >> $GITHUB_STEP_SUMMARY

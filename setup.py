@@ -36,7 +36,7 @@ setup(
     name="DAWG2",
     version="0.10.0",
     description="Fast and memory efficient DAWG (DAFSA) for Python",
-    long_description=open("README.rst").read() + "\n\n" + open("CHANGES.rst").read(),
+    long_description=open("README.md").read() + "\n\n" + open("CHANGES.md").read(),
     author="Mikhail Korobov",
     author_email="kmike84@gmail.com",
     url="https://github.com/pymorphy2-fork/DAWG/",

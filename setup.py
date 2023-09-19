@@ -5,8 +5,7 @@ import os
 from Cython.Build import cythonize
 from setuptools import Extension, setup
 
-os.environ["TEST"] = "TRUE"
-TEST = bool(os.environ.get("TEST", False))
+TEST = os.environ.get("TEST", "false").casefold() == "true"
 
 compiler_directives = {"language_level": 3}
 define_macros = []

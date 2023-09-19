@@ -35,6 +35,8 @@ jobs:
           python -m pip install --upgrade pip setuptools cython wheel pytest pytest-cov
 
       - name: "Build DAWG for ${{ matrix.python-version }}"
+        env:
+          TEST: true
         run: |
           python setup.py build_ext --inplace
 

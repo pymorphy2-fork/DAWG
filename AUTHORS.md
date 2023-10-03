@@ -6,7 +6,8 @@
 - Alex Moiseenko;
 - [Matt Hickford](https://github.com/matt-hickford);
 - [Ikuya Yamada](https://github.com/ikuyamada);
-- [bt2901](https://github.com/bt2901).
+- [bt2901](https://github.com/bt2901);
+- [insolor](https://github.com/insolor).
 
 This module uses [dawgdic](https://code.google.com/p/dawgdic/) C++
 library by Susumu Yata & contributors.

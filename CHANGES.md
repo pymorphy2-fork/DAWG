@@ -1,9 +1,14 @@
 # Changes
 
+## 0.11.0 (2023-10-03)
+
+- Build with trace options only for tests
+- Build wheels for Python 3.12, enable tests on Python 3.12
+
 ## 0.10.0 (2023-09-05)
 
-- More flexible char substitutes (by bt2901)
-- Support of Python versions older then 3.8 is dropped
+- More flexible char substitutes (by @bt2901)
+- Support of Python versions older than 3.8 is dropped
 - Building binary wheels for pypi.org
 
 ## 0.9.0 (2023-05-23)

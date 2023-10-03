@@ -33,9 +33,10 @@ ext_modules = cythonize(
 
 setup(
     name="DAWG2",
-    version="0.11.0",
+    version="0.11.1",
     description="Fast and memory efficient DAWG (DAFSA) for Python",
     long_description=open("README.md").read() + "\n\n" + open("CHANGES.md").read(),
+    long_description_content_type='text/markdown',
     author="Mikhail Korobov",
     author_email="kmike84@gmail.com",
     url="https://github.com/pymorphy2-fork/DAWG/",
@@ -52,6 +53,7 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Scientific/Engineering :: Information Analysis",

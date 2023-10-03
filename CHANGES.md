@@ -1,5 +1,10 @@
 # Changes
 
+## 0.11.1 (2023-10-03)
+
+- Fixed readme appearance on pypi.org
+- Add Python 3.12 to metadata for pypi.org
+
 ## 0.11.0 (2023-10-03)
 
 - Build with trace options only for tests

@@ -1,7 +1,7 @@
 from _base_types cimport BaseType, SizeType, UCharType, ValueType
 
 
-cdef extern from "../lib/dawgdic/dawg.h" namespace "dawgdic":
+cdef extern from "../lib/dawgdic/src/dawgdic/dawg.h" namespace "dawgdic":
 
     cdef cppclass Dawg:
         Dawg()

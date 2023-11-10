@@ -2,7 +2,7 @@ from _base_types cimport BaseType, CharType, SizeType, UCharType, ValueType
 from _dawg cimport Dawg
 
 
-cdef extern from "../lib/dawgdic/dawg-builder.h" namespace "dawgdic":
+cdef extern from "../lib/dawgdic/src/dawgdic/dawg-builder.h" namespace "dawgdic":
     cdef cppclass DawgBuilder:
 
         DawgBuilder() nogil  #(SizeType initial_hash_table_size = DEFAULT_INITIAL_HASH_TABLE_SIZE)

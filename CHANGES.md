@@ -1,5 +1,9 @@
 # Changes
 
+## 0.12.0 (2023-11-24)
+
+- Fixed memory overflow on corrupted file in dawgdic code by @gmossessian
+
 ## 0.11.1 (2023-10-03)
 
 - Fixed readme appearance on pypi.org

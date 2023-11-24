@@ -33,7 +33,7 @@ ext_modules = cythonize(
 
 setup(
     name="DAWG2",
-    version="0.11.1",
+    version="0.12.0",
     description="Fast and memory efficient DAWG (DAFSA) for Python",
     long_description=open("README.md").read() + "\n\n" + open("CHANGES.md").read(),
     long_description_content_type='text/markdown',

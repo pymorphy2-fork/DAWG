@@ -1,5 +1,9 @@
 # Changes
 
+## 0.12.1 (2023-12-02)
+
+- Fixed source distribution
+
 ## 0.12.0 (2023-11-24)
 
 - Fixed memory overflow on corrupted file in dawgdic code by @gmossessian

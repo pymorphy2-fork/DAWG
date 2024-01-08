@@ -26,7 +26,6 @@ extensions = [
 
 ext_modules = cythonize(
     extensions,
-    language="c++",
     annotate=False,
     compiler_directives=compiler_directives,
 )

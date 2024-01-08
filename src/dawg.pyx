@@ -1,5 +1,6 @@
 # cython: profile=False
 # cython: embedsignature=True
+# distutils: language=c++
 
 cimport _dawg
 cimport _dictionary_builder

@@ -581,7 +581,7 @@ cdef class BytesDAWG(CompletionDAWG):
     cpdef list items(self, unicode prefix=""):
         cdef bytes b_prefix = prefix.encode('utf8')
         cdef bytes value
-        cdef int i
+        cdef unsigned int i
         cdef list res = []
         cdef char* raw_key
         cdef char* raw_value
@@ -623,7 +623,7 @@ cdef class BytesDAWG(CompletionDAWG):
     def iteritems(self, unicode prefix=""):
         cdef bytes b_prefix = prefix.encode('utf8')
         cdef bytes value
-        cdef int i
+        cdef unsigned int i
         cdef char* raw_key
         cdef char* raw_value
         cdef int raw_value_len
@@ -659,7 +659,7 @@ cdef class BytesDAWG(CompletionDAWG):
 
     cpdef list keys(self, unicode prefix=""):
         cdef bytes b_prefix = prefix.encode('utf8')
-        cdef int i
+        cdef unsigned int i
         cdef list res = []
         cdef char* raw_key
 
@@ -684,7 +684,7 @@ cdef class BytesDAWG(CompletionDAWG):
 
     def iterkeys(self, unicode prefix=""):
         cdef bytes b_prefix = prefix.encode('utf8')
-        cdef int i
+        cdef unsigned int i
         cdef char* raw_key
 
         cdef BaseType index = self.dct.root()

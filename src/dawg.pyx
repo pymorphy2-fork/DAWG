@@ -1,5 +1,6 @@
 # cython: profile=False
 # cython: embedsignature=True
+# distutils: language=c++
 
 cimport _dawg
 cimport _dictionary_builder
@@ -580,7 +581,7 @@ cdef class BytesDAWG(CompletionDAWG):
     cpdef list items(self, unicode prefix=""):
         cdef bytes b_prefix = prefix.encode('utf8')
         cdef bytes value
-        cdef int i
+        cdef unsigned int i
         cdef list res = []
         cdef char* raw_key
         cdef char* raw_value
@@ -604,6 +605,8 @@ cdef class BytesDAWG(CompletionDAWG):
             for i in range(0, completer.length()):
                 if raw_key[i] == self._c_payload_separator:
                     break
+            else:
+                continue
 
             raw_value = &(raw_key[i])
             raw_value_len = completer.length() - i
@@ -622,7 +625,7 @@ cdef class BytesDAWG(CompletionDAWG):
     def iteritems(self, unicode prefix=""):
         cdef bytes b_prefix = prefix.encode('utf8')
         cdef bytes value
-        cdef int i
+        cdef unsigned int i
         cdef char* raw_key
         cdef char* raw_value
         cdef int raw_value_len
@@ -658,7 +661,7 @@ cdef class BytesDAWG(CompletionDAWG):
 
     cpdef list keys(self, unicode prefix=""):
         cdef bytes b_prefix = prefix.encode('utf8')
-        cdef int i
+        cdef unsigned int i
         cdef list res = []
         cdef char* raw_key
 
@@ -676,6 +679,8 @@ cdef class BytesDAWG(CompletionDAWG):
             for i in range(0, completer.length()):
                 if raw_key[i] == self._c_payload_separator:
                     break
+            else:
+                continue
 
             u_key = raw_key[:i].decode('utf8')
             res.append(u_key)
@@ -683,7 +688,7 @@ cdef class BytesDAWG(CompletionDAWG):
 
     def iterkeys(self, unicode prefix=""):
         cdef bytes b_prefix = prefix.encode('utf8')
-        cdef int i
+        cdef unsigned int i
         cdef char* raw_key
 
         cdef BaseType index = self.dct.root()

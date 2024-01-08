@@ -23,10 +23,10 @@ cdef extern from "../lib/dawgdic/src/dawgdic/dictionary.h" namespace "dawgdic":
         ValueType value(BaseType index) nogil
 
         # Reads a dictionary from an input stream.
-        bint Read(istream *input) nogil except +
+        bint Read(istream *input) except + nogil
 
         # Writes a dictionry to an output stream.
-        bint Write(ostream *output) nogil except +
+        bint Write(ostream *output) except + nogil
 
         # Exact matching.
         bint Contains(CharType *key) nogil

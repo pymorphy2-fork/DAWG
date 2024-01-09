@@ -606,7 +606,7 @@ cdef class BytesDAWG(CompletionDAWG):
                 if raw_key[i] == self._c_payload_separator:
                     break
             else:
-                continue
+                i = completer.length()
 
             raw_value = &(raw_key[i])
             raw_value_len = completer.length() - i
@@ -680,7 +680,7 @@ cdef class BytesDAWG(CompletionDAWG):
                 if raw_key[i] == self._c_payload_separator:
                     break
             else:
-                continue
+                i = completer.length()
 
             u_key = raw_key[:i].decode('utf8')
             res.append(u_key)

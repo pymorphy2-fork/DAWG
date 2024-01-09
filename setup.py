@@ -30,11 +30,13 @@ ext_modules = cythonize(
     compiler_directives=compiler_directives,
 )
 
+long_description = open("README.md", encoding="utf-8").read() + "\n\n" + open("CHANGES.md", encoding="utf-8").read()
+
 setup(
     name="DAWG2",
     version="0.12.1",
     description="Fast and memory efficient DAWG (DAFSA) for Python",
-    long_description=open("README.md").read() + "\n\n" + open("CHANGES.md").read(),
+    long_description=long_description,
     long_description_content_type='text/markdown',
     author="Mikhail Korobov",
     author_email="kmike84@gmail.com",

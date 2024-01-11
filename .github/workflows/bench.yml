@@ -31,7 +31,7 @@ jobs:
 
       - name: "Build DAWG"
         run: |
-          python setup.py build_ext --inplace
+          pip install -e .
 
       - name: "Run benchmark"
         run: |

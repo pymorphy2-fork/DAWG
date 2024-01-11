@@ -38,7 +38,7 @@ jobs:
         env:
           TEST: true
         run: |
-          python setup.py build_ext --inplace
+          pip install -e .
 
       - name: "Run tests for ${{ matrix.python-version }}"
         run: |

@@ -4,6 +4,7 @@
 
 - Fixed build warnings in dawgdic and DAWG itself
 - Package metadata moved from setup.py to pyproject.toml
+- Removed three unused "half-internal" methods in class DAWG
 
 ## 0.12.1 (2023-12-02)
 

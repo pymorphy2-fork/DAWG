@@ -1,6 +1,6 @@
 # Changes
 
-## 0.13.0 (2024-01-12)
+## 0.13.0 (2024-01-25)
 
 - Fixed build warnings in dawgdic and DAWG itself
 - Package metadata moved from setup.py to pyproject.toml

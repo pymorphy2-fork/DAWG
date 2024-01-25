@@ -168,15 +168,6 @@ cdef class DAWG:
         self.frombytes(state)
 
     # half-internal methods
-    def _size(self):
-        return self.dct.size()
-
-    def _total_size(self):
-        return self.dct.total_size()
-
-    def _file_size(self):
-        return self.dct.file_size()
-
     cdef bint _has_value(self, BaseType index):
         return  self.dct.has_value(index)
 

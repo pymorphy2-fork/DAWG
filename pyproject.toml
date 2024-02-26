@@ -4,7 +4,6 @@ version = "0.13.0"
 requires-python = ">= 3.8"
 description = "Fast and memory efficient DAWG (DAFSA) for Python"
 readme = "README.md"
-license = "MIT"
 
 authors = [
     {name = "Mikhail Korobov", email = "kmike84@gmail.com"}

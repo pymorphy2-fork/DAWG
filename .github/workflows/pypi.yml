@@ -83,7 +83,7 @@ jobs:
         merge-multiple: true
         path: dist
 
-    - uses: pypa/gh-action-pypi-publish@v1.10.0
+    - uses: pypa/gh-action-pypi-publish@v1.10.2
       with:
         user: ${{ secrets.PYPI_USERNAME }}
         password: ${{ secrets.PYPI_PASSWORD }}

@@ -1,6 +1,6 @@
 [project]
 name = "DAWG2"
-version = "0.13.0"
+version = "0.13.1"
 requires-python = ">= 3.8"
 description = "Fast and memory efficient DAWG (DAFSA) for Python"
 readme = "README.md"

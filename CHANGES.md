@@ -1,5 +1,9 @@
 # Changes
 
+## 0.13.1 (2024-10-31)
+
+- No major changes, just a release with Python 3.13 wheels
+
 ## 0.13.0 (2024-01-25)
 
 - Fixed build warnings in dawgdic and DAWG itself

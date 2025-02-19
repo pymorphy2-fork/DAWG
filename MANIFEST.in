@@ -6,6 +6,6 @@ include lib/COPYING
 
 recursive-include docs *.rst *.py Makefile make.bat
 
-recursive-include src *.cpp *.pxd *.pyx
+recursive-include src *.cpp *.pxd *.pyx *.pyi
 recursive-include lib *.c *.h
 recursive-include tests *.py

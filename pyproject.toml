@@ -55,5 +55,5 @@ line-length = 120
 select = ["E", "F", "UP"]
 ignore = ["UP015"]
 unfixable = ["F401"]
-target-version = "py38"
+target-version = "py39"
 exclude = ["docs"]

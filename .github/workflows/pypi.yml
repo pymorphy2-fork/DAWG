@@ -3,6 +3,9 @@ name: Deploy to pypi.org
 on:
   workflow_dispatch:
 
+permissions:
+  id-token: write
+
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}

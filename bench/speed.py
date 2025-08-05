@@ -200,7 +200,6 @@ NON_WORDS_1k = ['ыва', 'xyz', 'соы', 'Axx', 'avы']*200
     )
 
     for struct_name, setup in structures[1:]:
-
         # prefixes of a given key
         _bench_data = [
             ("hits", "WORDS100k"),
@@ -290,7 +289,6 @@ def profiling():
 
 
 if __name__ == "__main__":
-
     benchmark()
     # profiling()
     print("\n~~~~~~~~~~~~~~\n")

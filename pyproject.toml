@@ -1,7 +1,7 @@
 [project]
 name = "DAWG2"
-version = "0.13.1"
-requires-python = ">= 3.8"
+version = "0.13.2"
+requires-python = ">= 3.9"
 description = "Fast and memory efficient DAWG (DAFSA) for Python"
 readme = "README.md"
 
@@ -20,7 +20,6 @@ classifiers=[
     "Programming Language :: Cython",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -51,17 +50,12 @@ exclude_lines = [
     "@(abc\\.)?abstractmethod",
 ]
 
-[tool.black]
-line-length = 120
-extend-exclude = "docs"
-
-[tool.isort]
-profile = "black"
-
 [tool.ruff]
 line-length = 120
+target-version = "py39"
+exclude = ["docs"]
+
+[tool.ruff.lint]
 select = ["E", "F", "UP"]
 ignore = ["UP015"]
 unfixable = ["F401"]
-target-version = "py38"
-exclude = ["docs"]

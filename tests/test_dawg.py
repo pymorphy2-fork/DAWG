@@ -22,7 +22,6 @@ def test_contains():
 
 class TestDAWG:
     def test_sorted_iterable(self):
-
         sorted_data = ["bar", "foo", "foobar"]
         contents = "\n".join(sorted_data).encode("utf8")
         with tempfile.NamedTemporaryFile() as f:
@@ -84,7 +83,6 @@ class TestDAWG:
 
 
 class TestIntDAWG:
-
     IntDAWG = dawg.IntDAWG
 
     def dawg(self):

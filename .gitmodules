@@ -1,0 +1,3 @@
+[submodule "lib/dawgdic"]
+	path = lib/dawgdic
+	url = https://github.com/s-yata/dawgdic

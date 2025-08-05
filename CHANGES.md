@@ -1,5 +1,10 @@
 # Changes
 
+## 0.13.2 (2025-08-05)
+
+- Drop Python 3.8
+- Migrate from dawgdic fork to <https://github.com/s-yata/dawgdic>
+
 ## 0.13.1 (2024-10-31)
 
 - No major changes, just a release with Python 3.13 wheels
@@ -28,7 +33,7 @@
 - Build with trace options only for tests
 - Build wheels for Python 3.12, enable tests on Python 3.12
 - Update code style a bit, remove redundant `coding: utf-8` comments and legacy things such as
-  `from __future__ import absolute_import, unicode_literals, division` needed for compatibility with Python 2 
+  `from __future__ import absolute_import, unicode_literals, division` needed for compatibility with Python 2
 
 ## 0.10.0 (2023-09-05)
 

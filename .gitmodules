@@ -1,3 +1,0 @@
-[submodule "lib/dawgdic"]
-	path = lib/dawgdic
-	url = https://github.com/pymorphy2-fork/dawgdic

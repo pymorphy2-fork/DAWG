@@ -45,6 +45,7 @@ jobs:
           python -m pytest --cov=./
     
       - name: Upload coverage data to coveralls.io
+        continue-on-error: true
         run: |
           pip install coveralls
           coveralls --service=github

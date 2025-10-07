@@ -48,9 +48,7 @@ jobs:
     
       - name: Upload coverage data to coveralls.io
         continue-on-error: true
-        run: |
-          pip install coveralls
-          coveralls --service=github
+        run: pipx run coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: ${{ matrix.python-version }}
@@ -62,10 +60,8 @@ jobs:
     runs-on: ubuntu-latest
     container: python:3-slim
     steps:
-    - name: Install coveralls
-      run: pip3 install --upgrade coveralls
     - name: Finished
       continue-on-error: true
-      run: coveralls --finish
+      run: pipx run coveralls --finish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

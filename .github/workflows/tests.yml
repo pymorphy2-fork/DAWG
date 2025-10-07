@@ -48,7 +48,7 @@ jobs:
     
       - name: Upload coverage data to coveralls.io
         continue-on-error: true
-        run: pipx run --python python3.12 coveralls --service=github
+        run: pipx run coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: ${{ matrix.python-version }}
@@ -62,6 +62,6 @@ jobs:
     steps:
     - name: Finished
       continue-on-error: true
-      run: pipx run --python python3.12 coveralls --finish
+      run: pipx run coveralls --finish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

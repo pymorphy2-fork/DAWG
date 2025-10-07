@@ -11,4 +11,3 @@ cdef extern from "../../lib/dawgdic/src/dawgdic/base-types.h" namespace "dawgdic
 
     # 32 or 64-bit unsigned integer.
     ctypedef int SizeType
-

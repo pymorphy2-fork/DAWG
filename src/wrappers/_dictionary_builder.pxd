@@ -4,4 +4,3 @@ from _dictionary cimport Dictionary
 
 cdef extern from "../../lib/dawgdic/src/dawgdic/dictionary-builder.h" namespace "dawgdic::DictionaryBuilder":
     cdef bint Build (Dawg &dawg, Dictionary *dic) nogil
-

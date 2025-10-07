@@ -1,4 +1,4 @@
-from _base_types cimport BaseType, CharType, SizeType, UCharType, ValueType
+from _base_types cimport CharType, SizeType, ValueType
 from _dawg cimport Dawg
 
 

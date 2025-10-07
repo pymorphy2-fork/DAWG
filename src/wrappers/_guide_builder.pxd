@@ -3,6 +3,6 @@ from _dictionary cimport Dictionary
 from _guide cimport Guide
 
 
-cdef extern from "../lib/dawgdic/src/dawgdic/guide-builder.h" namespace "dawgdic::GuideBuilder":
+cdef extern from "../../lib/dawgdic/src/dawgdic/guide-builder.h" namespace "dawgdic::GuideBuilder":
     cdef bint Build (Dawg &dawg, Dictionary &dic, Guide* guide) nogil
 

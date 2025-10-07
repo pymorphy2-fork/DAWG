@@ -3,7 +3,7 @@ from _guide_unit cimport GuideUnit
 from iostream cimport istream, ostream
 
 
-cdef extern from "../lib/dawgdic/src/dawgdic/guide.h" namespace "dawgdic":
+cdef extern from "../../lib/dawgdic/src/dawgdic/guide.h" namespace "dawgdic":
     cdef cppclass Guide:
 
         Guide()

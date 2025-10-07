@@ -1,4 +1,4 @@
-cdef extern from "../lib/dawgdic/src/dawgdic/base-types.h" namespace "dawgdic":
+cdef extern from "../../lib/dawgdic/src/dawgdic/base-types.h" namespace "dawgdic":
     # 8-bit characters.
     ctypedef char CharType
     ctypedef unsigned char UCharType

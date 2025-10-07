@@ -22,4 +22,4 @@ updates:
   - package-ecosystem: "gitsubmodule"
     directory: "/lib/dawgdic"
     schedule:
-      interval: "montly"
+      interval: "monthly"

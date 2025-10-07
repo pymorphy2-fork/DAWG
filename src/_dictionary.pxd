@@ -1,4 +1,4 @@
-from _base_types cimport BaseType, CharType, SizeType, UCharType, ValueType
+from _base_types cimport BaseType, CharType, SizeType, ValueType
 from _dictionary_unit cimport DictionaryUnit
 from iostream cimport istream, ostream
 

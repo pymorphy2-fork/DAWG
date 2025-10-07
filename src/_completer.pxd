@@ -1,5 +1,4 @@
 from _base_types cimport BaseType, SizeType, ValueType
-from _dawg cimport Dawg
 from _dictionary cimport Dictionary
 from _guide cimport Guide
 

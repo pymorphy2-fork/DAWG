@@ -1,4 +1,4 @@
-from _base_types cimport BaseType, CharType, SizeType, UCharType, ValueType
+from _base_types cimport BaseType, SizeType, UCharType
 from _guide_unit cimport GuideUnit
 from iostream cimport istream, ostream
 

@@ -7,7 +7,7 @@ cimport _dictionary_builder
 cimport _guide_builder
 cimport b64_decode
 cimport iostream
-from _base_types cimport BaseType, CharType, SizeType
+from _base_types cimport BaseType, CharType
 from _completer cimport Completer
 from _dawg_builder cimport DawgBuilder
 from _dictionary cimport Dictionary

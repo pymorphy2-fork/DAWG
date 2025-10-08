@@ -2,12 +2,6 @@ name: Deploy to pypi.org
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
 
 permissions:
   id-token: write
@@ -100,4 +94,4 @@ jobs:
         merge-multiple: true
         path: dist
 
-    # - uses: pypa/gh-action-pypi-publish@v1.13.0
+    - uses: pypa/gh-action-pypi-publish@v1.13.0

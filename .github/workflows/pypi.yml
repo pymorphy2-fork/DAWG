@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build_wheels:
-    name: Build wheels on ${{ matrix.os }}
+    name: Build wheels for ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
@@ -24,12 +24,12 @@ jobs:
           - windows-2022
           - macos-14
         python-version:
-          - "cp39-*"
-          - "cp310-*"
-          - "cp311-*"
-          - "cp312-*"
-          - "cp313-*"
-          - "cp314-*"
+          - "cp39"
+          - "cp310"
+          - "cp311"
+          - "cp312"
+          - "cp313"
+          - "cp314"
 
     steps:
       - uses: actions/checkout@v5
@@ -51,11 +51,11 @@ jobs:
           CIBW_ARCHS_LINUX: x86_64 i686
           CIBW_ARCHS_MACOS: x86_64 universal2
           CIBW_ARCHS_WINDOWS: AMD64 x86
-          CIBW_BUILD: ${{ matrix.python-version }}
+          CIBW_BUILD: ${{ matrix.python-version }}-*
 
       - uses: actions/upload-artifact@v4
         with:
-          name: artifact_wheels_${{ matrix.os }}
+          name: artifact_wheels_${{ matrix.python-version }}_${{ matrix.os }}
           path: ./wheelhouse/*.whl
 
   build_sdist:

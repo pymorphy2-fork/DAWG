@@ -1,6 +1,8 @@
 name: Deploy to pypi.org
 
 on:
+  release:
+    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -81,7 +83,7 @@ jobs:
     name: Upload if release
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
-    # if: github.event_name == 'release' && github.event.action == 'published'
+    if: github.event_name == 'release' && github.event.action == 'published'
 
     steps:
     - uses: actions/setup-python@v6

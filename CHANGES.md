@@ -1,5 +1,10 @@
 # Changes
 
+## 0.13.3 (2025-10-08)
+
+- Release with Python 3.14 wheels
+- Some code cleanup and other minor changes
+
 ## 0.13.2 (2025-08-05)
 
 - Drop Python 3.8

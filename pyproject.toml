@@ -1,6 +1,6 @@
 [project]
 name = "DAWG2"
-version = "0.13.2"
+version = "0.13.3"
 requires-python = ">= 3.9"
 description = "Fast and memory efficient DAWG (DAFSA) for Python"
 readme = "README.md"
@@ -25,6 +25,7 @@ classifiers=[
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python :: Implementation :: CPython",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Scientific/Engineering :: Information Analysis",

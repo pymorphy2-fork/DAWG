@@ -1,7 +1,7 @@
 from _base_types cimport BaseType, UCharType, ValueType
 
 
-cdef extern from "../lib/dawgdic/src/dawgdic/dictionary-unit.h" namespace "dawgdic":
+cdef extern from "../../lib/dawgdic/src/dawgdic/dictionary-unit.h" namespace "dawgdic":
     cdef cppclass DictionaryUnit:
 
         DictionaryUnit() nogil

@@ -2,17 +2,17 @@
 # cython: embedsignature=True
 # distutils: language=c++
 
-cimport _dawg
-cimport _dictionary_builder
-cimport _guide_builder
-cimport b64_decode
-cimport iostream
-from _base_types cimport BaseType, CharType
-from _completer cimport Completer
-from _dawg_builder cimport DawgBuilder
-from _dictionary cimport Dictionary
-from _guide cimport Guide
-from iostream cimport ifstream, istream, ostream, stringstream
+cimport wrappers._dawg as _dawg
+cimport wrappers._dictionary_builder as _dictionary_builder
+cimport wrappers._guide_builder as _guide_builder
+cimport wrappers.b64_decode as b64_decode
+cimport wrappers.iostream as iostream
+from wrappers._base_types cimport BaseType, CharType
+from wrappers._completer cimport Completer
+from wrappers._dawg_builder cimport DawgBuilder
+from wrappers._dictionary cimport Dictionary
+from wrappers._guide cimport Guide
+from wrappers.iostream cimport ifstream, istream, ostream, stringstream
 from libcpp.string cimport string
 from libcpp.vector cimport vector
 

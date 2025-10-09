@@ -3,7 +3,7 @@ from _dictionary_unit cimport DictionaryUnit
 from iostream cimport istream, ostream
 
 
-cdef extern from "../lib/dawgdic/src/dawgdic/dictionary.h" namespace "dawgdic":
+cdef extern from "../../lib/dawgdic/src/dawgdic/dictionary.h" namespace "dawgdic":
     cdef cppclass Dictionary:
 
         Dictionary() nogil

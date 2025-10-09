@@ -1,7 +1,7 @@
 from _base_types cimport UCharType
 
 
-cdef extern from "../lib/dawgdic/src/dawgdic/guide-unit.h" namespace "dawgdic":
+cdef extern from "../../lib/dawgdic/src/dawgdic/guide-unit.h" namespace "dawgdic":
     cdef cppclass GuideUnit:
         GuideUnit() nogil
 

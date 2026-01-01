@@ -49,7 +49,7 @@ jobs:
           CIBW_ARCHS_WINDOWS: AMD64 x86
           CIBW_BUILD: ${{ matrix.python-version }}-*
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: artifact_wheels_${{ matrix.python-version }}_${{ matrix.os }}
           path: ./wheelhouse/*.whl
@@ -74,7 +74,7 @@ jobs:
       - name: Build sdist
         run: python setup.py sdist
 
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v6
         with:
           name: artifact_sdist
           path: dist/*.tar.gz
@@ -90,7 +90,7 @@ jobs:
       with:
         python-version: "3.12"
 
-    - uses: actions/download-artifact@v6
+    - uses: actions/download-artifact@v7
       with:
         pattern: artifact_*
         merge-multiple: true

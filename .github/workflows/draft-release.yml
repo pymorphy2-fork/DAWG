@@ -17,7 +17,7 @@ jobs:
           echo VERSION=$(toml get --toml-path pyproject.toml project.version) >> $GITHUB_ENV
 
       - name: Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           draft: true
           generate_release_notes: true

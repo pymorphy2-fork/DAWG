@@ -20,7 +20,6 @@ jobs:
           - windows-2022
           - macos-14
         python-version:
-          - "cp39"
           - "cp310"
           - "cp311"
           - "cp312"

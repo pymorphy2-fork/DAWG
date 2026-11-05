@@ -30,6 +30,6 @@ fast advanced methods like prefix search.
 # License
 
 Wrapper code is licensed under MIT License. Uses
-[dawgdic](https://github.com/s-yata/dawgdic) C++ library is licensed
+[dawgdic](https://github.com/s-yata/dawgdic) C++ library which is licensed
 under BSD license. Bundled [libb64](http://libb64.sourceforge.net/) is
 Public Domain.

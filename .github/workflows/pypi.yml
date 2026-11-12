@@ -1,6 +1,9 @@
 name: Deploy to pypi.org
 
 on:
+  pull_request:
+    branches:
+      - master
   release:
     types: [published]
   workflow_dispatch:
@@ -9,7 +12,19 @@ permissions:
   contents: read
 
 jobs:
+  approve_pr_build:
+    name: Approve package build for PR
+    if: github.event_name == 'pull_request'
+    environment: pr-build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Package build approved"
+
   build_wheels:
+    needs: approve_pr_build
+    if: >-
+      !cancelled() &&
+      (needs.approve_pr_build.result == 'success' || needs.approve_pr_build.result == 'skipped')
     name: Build wheels for ${{ matrix.python-version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -18,7 +33,7 @@ jobs:
         os:
           - ubuntu-24.04
           - windows-2022
-          - macos-14
+          - macos-15
         python-version:
           - "cp310"
           - "cp311"
@@ -45,7 +60,7 @@ jobs:
           python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_ARCHS_LINUX: x86_64 i686
-          CIBW_ARCHS_MACOS: x86_64 universal2
+          CIBW_ARCHS_MACOS: x86_64 arm64 universal2
           CIBW_ARCHS_WINDOWS: AMD64 x86
           CIBW_BUILD: ${{ matrix.python-version }}-*
 
@@ -53,8 +68,13 @@ jobs:
         with:
           name: artifact_wheels_${{ matrix.python-version }}_${{ matrix.os }}
           path: ./wheelhouse/*.whl
+          if-no-files-found: error
 
   build_sdist:
+    needs: approve_pr_build
+    if: >-
+      !cancelled() &&
+      (needs.approve_pr_build.result == 'success' || needs.approve_pr_build.result == 'skipped')
     name: Build source distribution
     runs-on: ubuntu-latest
     steps:
@@ -78,15 +98,20 @@ jobs:
         with:
           name: artifact_sdist
           path: dist/*.tar.gz
+          if-no-files-found: error
 
   upload_all:
-    name: Upload if release
+    name: Publish to PyPI
     permissions:
       contents: read
       id-token: write
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'published'
+    if: >-
+      !cancelled() &&
+      github.event_name != 'pull_request' &&
+      needs.build_wheels.result == 'success' &&
+      needs.build_sdist.result == 'success'
 
     steps:
     - uses: actions/setup-python@v7

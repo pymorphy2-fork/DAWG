@@ -1,13 +1,17 @@
 name: Benchmark
-run-name: "Benchmark on ${{ github.event.workflow_run.head_sha || github.sha }}"
+run-name: "Benchmark on ${{ github.sha }}"
 
 on:
-  workflow_run:
-    workflows:
-      - Tests
-    types:
-      - completed
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -13,6 +13,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  cython-lint:
+    name: "Lint Cython sources"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: "actions/checkout@v7"
+      - uses: "actions/setup-python@v7"
+        with:
+          python-version: "3.15"
+      - name: "Install cython-lint"
+        run: python -m pip install cython-lint
+      - name: "Run cython-lint"
+        run: cython-lint --max-line-length 120 src
+
   tests:
     name: "Python ${{ matrix.python-version }} on ${{ matrix.os }}"
     runs-on: ${{ matrix.os }}

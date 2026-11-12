@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write
+  contents: read
 
 jobs:
   build_wheels:
@@ -81,6 +81,9 @@ jobs:
 
   upload_all:
     name: Upload if release
+    permissions:
+      contents: read
+      id-token: write
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'

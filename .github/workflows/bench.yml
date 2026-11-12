@@ -1,4 +1,5 @@
 name: Benchmark
+run-name: "Benchmark on ${{ github.event.workflow_run.head_sha || github.sha }}"
 
 on:
   workflow_run:
@@ -35,7 +36,7 @@ jobs:
 
       - name: "Run benchmark"
         run: |
-          echo '### Benchmark results' >> $GITHUB_STEP_SUMMARY
+          echo "### Benchmark results on commit ($(git rev-parse --short HEAD))" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           python -VV >> $GITHUB_STEP_SUMMARY
           python -m bench.speed >> $GITHUB_STEP_SUMMARY

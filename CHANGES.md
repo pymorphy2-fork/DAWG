@@ -1,5 +1,9 @@
 # Changes
 
+## 0.13.4 (2025-11-12)
+
+- Release with Python 3.15 wheels
+
 ## 0.13.3 (2025-10-08)
 
 - Release with Python 3.14 wheels

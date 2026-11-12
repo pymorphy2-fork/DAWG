@@ -103,7 +103,7 @@ jobs:
   upload_all:
     name: Publish to PyPI
     permissions:
-      contents: read
+      contents: write
       id-token: write
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
@@ -125,3 +125,38 @@ jobs:
         path: dist
 
     - uses: pypa/gh-action-pypi-publish@v1.14.3
+
+    - name: Add PyPI link to GitHub release
+      uses: actions/github-script@v8
+      with:
+        script: |
+          const fs = require('node:fs');
+          const wheels = fs.readdirSync('dist').filter(name => name.endsWith('.whl'));
+          const packages = new Set(wheels.map(name => name.split('-').slice(0, 2).join('/')));
+          if (packages.size !== 1) {
+            throw new Error('Expected wheels for exactly one package version');
+          }
+          const [project, version] = [...packages][0].split('/');
+          const tag = context.payload.release?.tag_name || version;
+          const url = `https://pypi.org/project/${project}/${version}/`;
+          let release;
+          try {
+            ({ data: release } = await github.rest.repos.getReleaseByTag({
+              ...context.repo,
+              tag,
+            }));
+          } catch (error) {
+            if (error.status !== 404) throw error;
+            core.warning(`Release for tag ${tag} not found; package was published, but no link was added`);
+            return;
+          }
+          const body = release.body || '';
+          if (body.includes(url)) {
+            core.info('PyPI link is already present');
+            return;
+          }
+          await github.rest.repos.updateRelease({
+            ...context.repo,
+            release_id: release.id,
+            body: `${body.trimEnd()}${body.trim() ? '\n\n' : ''}[PyPI ${version}](${url})`,
+          });

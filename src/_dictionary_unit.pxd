@@ -18,7 +18,6 @@ cdef extern from "../lib/dawgdic/src/dawgdic/dictionary-unit.h" namespace "dawgd
         # Sets an offset to a non-leaf unit.
         bint set_offset(BaseType offset) nogil
 
-
         # Checks if a unit has a leaf as a child or not.
         bint has_leaf() nogil
 

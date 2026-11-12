@@ -39,6 +39,6 @@ cdef extern from "<sstream>" namespace "std":
 
 cdef extern from "<sstream>" namespace "std::stringstream":
 
-#    int in
+    # int in
     int out
     int binary

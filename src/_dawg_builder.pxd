@@ -5,7 +5,7 @@ from _dawg cimport Dawg
 cdef extern from "../lib/dawgdic/src/dawgdic/dawg-builder.h" namespace "dawgdic":
     cdef cppclass DawgBuilder:
 
-        DawgBuilder() nogil  #(SizeType initial_hash_table_size = DEFAULT_INITIAL_HASH_TABLE_SIZE)
+        DawgBuilder() nogil  # (SizeType initial_hash_table_size = DEFAULT_INITIAL_HASH_TABLE_SIZE)
 
         # Number of units.
         SizeType size() nogil

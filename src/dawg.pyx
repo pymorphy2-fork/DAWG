@@ -259,20 +259,17 @@ cdef class DAWG:
     @classmethod
     def compile_replaces(cls, replaces):
 
-        for k,v in replaces.items():
+        for k, v in replaces.items():
             if len(k) != 1:
                 raise ValueError("Keys must be single-char unicode strings.")
             if (isinstance(v, str) and len(v) != 1):
                 raise ValueError("Values must be single-char unicode strings or non-empty lists of such.")
             if isinstance(v, list) and (any(len(v_entry) != 1 for v_entry in v) or len(v) < 1):
                 raise ValueError("Values must be single-char unicode strings or non-empty lists of such.")
-        return dict(
-            (
-                k.encode('utf8'),
-                [(v_entry.encode('utf8'), unicode(v_entry)) for v_entry in v]
-            )
+        return {
+            k.encode('utf8'): [(v_entry.encode('utf8'), unicode(v_entry)) for v_entry in v]
             for k, v in replaces.items()
-        )
+        }
 
 
 cdef void init_completer(Completer& completer, Dictionary& dic, Guide& guide):
@@ -406,7 +403,7 @@ cdef class CompletionDAWG(DAWG):
 
     def _transitions(self):
         transitions = set()
-        cdef BaseType index, prev_index, completer_index
+        cdef BaseType index, prev_index
         cdef char* key
 
         cdef Completer completer
@@ -483,7 +480,9 @@ cdef class BytesDAWG(CompletionDAWG):
         cdef bytes b_key = <bytes>key.encode('utf8')
 
         if self._b_payload_separator in b_key:
-            raise Error("Payload separator (%r) is found within utf8-encoded key ('%s')" % (self._b_payload_separator, key))
+            raise Error(
+                "Payload separator (%r) is found within utf8-encoded key ('%s')" % (self._b_payload_separator, key)
+            )
 
         cdef bytes encoded_payload = b2a_base64(payload)
         return b_key + self._b_payload_separator + encoded_payload
@@ -753,12 +752,11 @@ cdef class BytesDAWG(CompletionDAWG):
 
     cdef list _similar_item_values(self, int start_pos, unicode key, BaseType cur_index, dict replace_chars):
         cdef BaseType next_index, index = cur_index
-        cdef unicode prefix, u_replace_char, found_key
+        cdef unicode _u_replace_char
         cdef bytes b_step, b_replace_char
         cdef list res = []
         cdef list extra_items, value
 
-        #cdef int start_pos = len(current_prefix)
         cdef int end_pos = len(key)
         cdef int word_pos = start_pos
 
@@ -766,7 +764,7 @@ cdef class BytesDAWG(CompletionDAWG):
             b_step = <bytes>(key[word_pos].encode('utf8'))
 
             if b_step in replace_chars:
-                for (b_replace_char, u_replace_char) in replace_chars[b_step]:
+                for (b_replace_char, _u_replace_char) in replace_chars[b_step]:
                     next_index = index
                     is_followed = self.dct.Follow(b_replace_char, &next_index)
                     if is_followed:
@@ -795,7 +793,6 @@ cdef class BytesDAWG(CompletionDAWG):
         unicode strings.
         """
         return self._similar_item_values(0, key, self.dct.root(), replaces)
-
 
 
 cdef class RecordDAWG(BytesDAWG):
@@ -855,7 +852,9 @@ def _iterable_from_argument(arg):
     else:
         return arg
 
+
 DEF LOOKUP_ERROR = -1
+
 
 cdef class IntDAWG(DAWG):
     """

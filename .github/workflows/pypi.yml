@@ -25,6 +25,7 @@ jobs:
           - "cp312"
           - "cp313"
           - "cp314"
+          - "cp315"
 
     steps:
       - uses: actions/checkout@v7
